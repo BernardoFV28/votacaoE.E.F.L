@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Votação 2025 - Escola Fernando Lobo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0a0a0a, #181818);
+      color: #2d3436;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background: #251515;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      padding: 30px;
+      max-width: 700px;
+      width: 100%;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      color: #015e4b;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: #636e72;
+    }
+
+    h2 {
+      margin: 20px 0 10px;
+      color: #09804e;
+      text-align: center;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    input {
+      border: 1px solid #b2bec3;
+    }
+
+    button {
+      background: #016450;
+      color: white;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #054750;
+      cursor: pointer;
+    }
+
+    .votacao {
+      display: block;
+      margin-top: 20px;
+    }
+
+    .candidato, .representante {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 10px 0;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+
+    .candidato:hover, .representante:hover {
+      transform: translateY(-4px);
+    }
+
+    .candidato h3, .representante h3 {
+      margin-bottom: 10px;
+      color: #09804e;
+    }
+
+    .resultados {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #dfe6e9;
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 20px;
+      }
+
+      header h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Votação 2025</h1>
+      <p>Escola Estadual Fernando Lobo</p>
+    </header>
+
+    <section class="login" id="login-section">
+      <h2>Login</h2>
+      <form id="login-form">
+        <input type="text" id="matricula" placeholder="Digite sua matrícula" required />
+        <button type="submit">Entrar</button>
+      </form>
+    </section>
+
+    <section class="votacao" id="votacao-section" style="display: none;">
+      <h2>Escolha o tema para votar</h2>
+      <form id="form-temas">
+        <div class="candidato">
+          <input type="radio" name="tema" id="tema1" value="tema1">
+          <label for="tema1">Votar no Tema A - Desenvolvimento</label>
+        </div>
+        <div class="candidato">
+          <input type="radio" name="tema" id="tema2" value="tema2">
+          <label for="tema2">Votar no Tema B - Inovação</label>
+        </div>
+        <div class="candidato">
+          <input type="radio" name="tema" id="tema3" value="tema3">
+          <label for="tema3">Votar no Tema C - Sustentabilidade</label>
+        </div>
+        <button type="button" onclick="votarTema()">Votar no Tema</button>
+      </form>
+
+      <h2>Escolha seu representante</h2>
+      <form id="form-representantes">
+        <div class="representante">
+          <input type="radio" name="representante" id="representanteA" value="representanteA">
+          <label for="representanteA">Representante A - João Silva</label>
+        </div>
+        <div class="representante">
+          <input type="radio" name="representante" id="representanteB" value="representanteB">
+          <label for="representanteB">Representante B - Maria Costa</label>
+        </div>
+        <div class="representante">
+          <input type="radio" name="representante" id="representanteC" value="representanteC">
+          <label for="representanteC">Representante C - Pedro Almeida</label>
+        </div>
+        <button type="button" onclick="votarRepresentante()">Votar no Representante</button>
+      </form>
+    </section>
+
+    <section class="resultados" id="resultados-section">
+      <h2>Resultados</h2>
+      <div id="resultados-temas">
+        <h3>Votos por Tema:</h3>
+        <p id="resultado-tema1">Tema A - Desenvolvimento: 0 votos</p>
+        <p id="resultado-tema2">Tema B - Inovação: 0 votos</p>
+        <p id="resultado-tema3">Tema C - Sustentabilidade: 0 votos</p>
+      </div>
+      <div id="resultados-representantes">
+        <h3>Votos por Representante:</h3>
+        <p id="resultado-representanteA">Representante A - João Silva: 0 votos</p>
+        <p id="resultado-representanteB">Representante B - Maria Costa: 0 votos</p>
+        <p id="resultado-representanteC">Representante C - Pedro Almeida: 0 votos</p>
+      </div>
+    </section>
+
+    <footer>
+      &copy; 2025 - Escola Estadual Fernando Lobo
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("login-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const matricula = document.getElementById("matricula").value.trim();
+
+      if (matricula !== "") {
+        document.getElementById("login-section").style.display = "none";
+        document.getElementById("votacao-section").style.display = "block";
+      } else {
+        alert("Digite uma matrícula válida.");
+      }
+    });
+
+    function votarTema() {
+      const temaSelecionado = document.querySelector('input[name="tema"]:checked');
+      if (temaSelecionado) {
+        const tema = temaSelecionado.value;
+        let votos = JSON.parse(localStorage.getItem("votos")) || {
+          tema1: 0,
+          tema2: 0,
+          tema3: 0
+        };
+        votos[tema] += 1;
+        localStorage.setItem("votos", JSON.stringify(votos));
+        alert(`Voto registrado com sucesso para o ${tema}!`);
+        mostrarResultados(); // Exibe os resultados após votar
+      } else {
+        alert("Selecione um tema para votar.");
+      }
+    }
+
+    function votarRepresentante() {
+      const representanteSelecionado = document.querySelector('input[name="representante"]:checked');
+      if (representanteSelecionado) {
+        const representante = representanteSelecionado.value;
+        let votosRepresentantes = JSON.parse(localStorage.getItem("votosRepresentantes")) || {
+          representanteA: 0,
+          representanteB: 0,
+          representanteC: 0
+        };
+        votosRepresentantes[representante] += 1;
+        localStorage.setItem("votosRepresentantes", JSON.stringify(votosRepresentantes));
+        alert(`Voto registrado com sucesso para o ${representante}!`);
+        mostrarResultados(); // Exibe os resultados após votar
+      } else {
+        alert("Selecione um representante para votar.");
+      }
+    }
+
+    function mostrarResultados() {
+      // Recupera os votos de temas e representantes do localStorage
+      const votosTemas = JSON.parse(localStorage.getItem("votos")) || {
+        tema1: 0,
+        tema2: 0,
+        tema3: 0
+      };
+      const votosRepresentantes = JSON.parse(localStorage.getItem("votosRepresentantes")) || {
+        representanteA: 0,
+        representanteB: 0,
+        representanteC: 0
+      };
+
+      // Exibe os resultados
+      document.getElementById("resultado-tema1").textContent = `Tema A - Desenvolvimento: ${votosTemas.tema1} votos`;
+      document.getElementById("resultado-tema2").textContent = `Tema B - Inovação: ${votosTemas.tema2} votos`;
+      document.getElementById("resultado-tema3").textContent = `Tema C - Sustentabilidade: ${votosTemas.tema3} votos`;
+
+      document.getElementById("resultado-representanteA").textContent = `Representante A - João Silva: ${votosRepresentantes.representanteA} votos`;
+      document.getElementById("resultado-representanteB").textContent = `Representante B - Maria Costa: ${votosRepresentantes.representanteB} votos`;
+      document.getElementById("resultado-representanteC").textContent = `Representante C - Pedro Almeida: ${votosRepresentantes.representanteC} votos`;
+
+      // Exibe a seção de resultados
+      document.getElementById("resultados-section").style.display = "block";
+    }
+  </script>
+</body>
+</html>
+
