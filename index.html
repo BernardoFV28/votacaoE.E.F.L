@@ -109,6 +109,54 @@
       box-shadow: 0 3px 6px rgba(0,0,0,0.1);
     }
 
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animated-article {
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0; /* Inicia invisível */
+    }
+
+    /* Estilo base dos artigos */
+    .mural-card {
+      font-size: 1.2em;
+      background-color: #032413c0;
+      color: #b2bec3;
+      border: 2px solid #251515;
+      border-radius: 13px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    h1 {
+      color: #09804e;
+      font-size: 2em;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    main {
+      padding: 10px;
+    }
+
+    strong.titulo {
+      color: #01b241;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
     footer {
       text-align: center;
       margin-top: 40px;
@@ -158,6 +206,7 @@
           <label for="tema3">Votar no Tema C - Sustentabilidade</label>
         </div>
         <button type="button" onclick="votarTema()">Votar no Tema</button>
+
       </form>
 
       <h2>Escolha seu representante</h2>
@@ -194,11 +243,46 @@
       </div>
     </section>
 
+  <h1><strong>Mural</strong></h1>
+
+  <main>
+    <article class="mural-card animated-article" style="animation-delay: 0.2s;">
+      <p>Quer ver sua voz ecoando nesse mural? Fala com um dos idealizadores do projeto e deixa tua marca vibrar no tempo.</p>
+    </article>
+
+    <article class="mural-card animated-article" style="animation-delay: 0.5s;">
+      <p><strong class="titulo">ENEM 2025:</strong></p>
+      <ul>
+        <li><strong>Inscrições:</strong> 26 de maio a 6 de junho.</li>
+        <li><strong>Provas:</strong> 9 e 16 de novembro.</li>
+      </ul>
+      <p><strong class="titulo">PISM 2025 (UFJF):</strong></p>
+      <ul>
+        <li><strong>Provas:</strong> 14 e 15 de dezembro de 2024.</li>
+        <li><strong>Resultado:</strong> Módulo III: 20 de fevereiro de 2025. Módulos I e II: 16 de junho de 2025.</li>
+      </ul>
+      <p><strong class="titulo">PISM 2026 (UFJF):</strong></p>
+      <ul>
+        <li><strong>Provas:</strong> 6 e 7 de dezembro de 2025.</li>
+      </ul>
+    </article>
+  </main>
+
+
+</main>
+  <article class="mural-card animated-article" style="animation-delay: 0.5s;" style="font-size: 1.2em; background-color: #032413c0; color: #b2bec3; border: 2px solid #251515; border-radius: 13px; padding: 15px;">
+    <p><strong style="color: #01b241; font-family: 'Courier New', Courier, monospace;">INTERCLASSE</strong></p>
+    <ul style="list-style: none; padding-left: 0;">
+      <li><strong>salas participantes :</strong> ainda serão decididas </li>
+      <li><strong>datas: </strong>ainda serão decididas </li>
+    </ul></article>
+  <article><p></p><br></article>
+</aside></main>
     <footer>
-      &copy; 2025 - Escola Estadual Fernando Lobo
+      &copy; 2025 - Escola Estadual Fernando Lobo-todos os direitos reservados
     </footer>
   </div>
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <!-- feito por Bernardo Fernandes Valentim Ehuqdugr Ihuqghghq Ydoqwlp -->
   <script>
     document.getElementById("login-form").addEventListener("submit", (event) => {
       event.preventDefault();
@@ -276,4 +360,3 @@
   </script>
 </body>
 </html>
-
